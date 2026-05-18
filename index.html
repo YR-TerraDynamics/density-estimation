@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>index</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-1861bbae5b71fe29aff8c5472363b160.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#interpolation" id="toc-interpolation" class="nav-link active" data-scroll-target="#interpolation">Interpolation</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#load-required-libraries" id="toc-load-required-libraries" class="nav-link" data-scroll-target="#load-required-libraries">Load required libraries</a></li>
+  <li><a href="#load-the-no₂-data" id="toc-load-the-no₂-data" class="nav-link" data-scroll-target="#load-the-no₂-data">Load the NO₂ data</a></li>
+  <li><a href="#create-prediction-grid" id="toc-create-prediction-grid" class="nav-link" data-scroll-target="#create-prediction-grid">Create prediction grid</a></li>
+  <li><a href="#apply-inverse-distance-weighting-idw-interpolation" id="toc-apply-inverse-distance-weighting-idw-interpolation" class="nav-link" data-scroll-target="#apply-inverse-distance-weighting-idw-interpolation">Apply Inverse Distance Weighting (IDW) interpolation</a></li>
+  <li><a href="#convert-interpolation-result-to-raster" id="toc-convert-interpolation-result-to-raster" class="nav-link" data-scroll-target="#convert-interpolation-result-to-raster">Convert interpolation result to raster</a></li>
+  <li><a href="#visualize-the-interpolated-no₂-surface" id="toc-visualize-the-interpolated-no₂-surface" class="nav-link" data-scroll-target="#visualize-the-interpolated-no₂-surface">Visualize the interpolated NO₂ surface</a></li>
+  <li><a href="#my-thoughts" id="toc-my-thoughts" class="nav-link" data-scroll-target="#my-thoughts">My thoughts</a></li>
+  <li><a href="#nearest-neighbor-approach-using-voronoi-polygons" id="toc-nearest-neighbor-approach-using-voronoi-polygons" class="nav-link" data-scroll-target="#nearest-neighbor-approach-using-voronoi-polygons">Nearest neighbor approach using Voronoi polygons</a></li>
+  <li><a href="#create-voronoi-polygons" id="toc-create-voronoi-polygons" class="nav-link" data-scroll-target="#create-voronoi-polygons">Create Voronoi polygons</a></li>
+  <li><a href="#attach-no₂-values-to-polygons" id="toc-attach-no₂-values-to-polygons" class="nav-link" data-scroll-target="#attach-no₂-values-to-polygons">Attach NO₂ values to polygons</a></li>
+  <li><a href="#visualize-the-result" id="toc-visualize-the-result" class="nav-link" data-scroll-target="#visualize-the-result">Visualize the result</a></li>
+  <li><a href="#my-thoughts-1" id="toc-my-thoughts-1" class="nav-link" data-scroll-target="#my-thoughts-1">My thoughts</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#density-estimation" id="toc-density-estimation" class="nav-link" data-scroll-target="#density-estimation">Density Estimation</a>
+  <ul class="collapse">
+  <li><a href="#data-context" id="toc-data-context" class="nav-link" data-scroll-target="#data-context">Data context</a></li>
+  <li><a href="#loading-the-necessary-libraries" id="toc-loading-the-necessary-libraries" class="nav-link" data-scroll-target="#loading-the-necessary-libraries">Loading the necessary libraries</a></li>
+  <li><a href="#preparing-point-data-for-spatial-analysis" id="toc-preparing-point-data-for-spatial-analysis" class="nav-link" data-scroll-target="#preparing-point-data-for-spatial-analysis">Preparing point data for spatial analysis</a>
+  <ul class="collapse">
+  <li><a href="#kernel-density-estimation" id="toc-kernel-density-estimation" class="nav-link" data-scroll-target="#kernel-density-estimation">Kernel density estimation</a></li>
+  <li><a href="#converting-to-raster-format" id="toc-converting-to-raster-format" class="nav-link" data-scroll-target="#converting-to-raster-format">Converting to raster format</a></li>
+  <li><a href="#visualizing-space-use" id="toc-visualizing-space-use" class="nav-link" data-scroll-target="#visualizing-space-use">Visualizing space use</a></li>
+  <li><a href="#voronoi-approach-thiessen-polygons" id="toc-voronoi-approach-thiessen-polygons" class="nav-link" data-scroll-target="#voronoi-approach-thiessen-polygons">Voronoi approach (Thiessen Polygons)</a></li>
+  <li><a href="#my-thoughts-2" id="toc-my-thoughts-2" class="nav-link" data-scroll-target="#my-thoughts-2">My thoughts</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+<img src="images/logo.png" style="width: 250px; margin-right: 20px;">
+<h1 style="margin: 0;">
+Solution for Interpolation and Density Estimation
+</h1>
+</div>
+<section id="interpolation" class="level1">
+<h1>Interpolation</h1>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The airquality dataset (luftqualitaet.gpkg) that I need to use for this task contains measurements of nitrogen dioxide NO₂ from 2015 for 97 monitoring sites in Switzerland. Nitrogen dioxide is produced when fuels and combustibles are burned, especially at high combustion temperatures, with road traffic being the main source.</p>
+<section id="load-required-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="load-required-libraries">Load required libraries</h3>
+<p>For this taks I need several R packages. The <code>sf</code> package is used for spatial vector data, <code>gstat</code> performs interpolation, and <code>terra</code> helps me work with raster data. I also use <code>ggplot2</code> for visualization.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="load-the-no₂-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-the-no₂-data">Load the NO₂ data</h3>
+<p>The dataset is stored in a GeoPackage file (.gpkg). I load it using st_read(). This file contains air quality measurements (NO₂) with geographic coordinates.</p>
+<p>I also inspect the data to understand its structure.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load spatial data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>air <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/luftqualitaet.gpkg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `luftqualitaet' from data source 
+  `/home/rhoumyas/Documents/ADLS/HS26/spatio-temp-ds/density-estimation/data/luftqualitaet.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 97 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2489281 ymin: 1077455 xmax: 2784450 ymax: 1282800
+Projected CRS: CH1903+ / LV95</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check structure</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(air)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 97 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2489281 ymin: 1077455 xmax: 2784450 ymax: 1282800
+Projected CRS: CH1903+ / LV95
+First 10 features:
+   value  unit                    geom
+1   24.2 æg/m3 POINT (2666075 1257972)
+2   10.4 æg/m3 POINT (2669780 1259020)
+3   20.2 æg/m3 POINT (2640730 1266215)
+4   31.3 æg/m3 POINT (2648490 1246985)
+5   40.0 æg/m3 POINT (2600170 1199990)
+6   22.0 æg/m3 POINT (2586025 1221660)
+7   24.0 æg/m3 POINT (2600833 1199785)
+8   34.0 æg/m3 POINT (2602040 1201565)
+9   22.0 æg/m3 POINT (2603050 1202815)
+10   0.3 æg/m3 POINT (2641910 1155280)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(air)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2586025 ymin: 1199990 xmax: 2669780 ymax: 1266215
+Projected CRS: CH1903+ / LV95
+  value  unit                    geom
+1  24.2 æg/m3 POINT (2666075 1257972)
+2  10.4 æg/m3 POINT (2669780 1259020)
+3  20.2 æg/m3 POINT (2640730 1266215)
+4  31.3 æg/m3 POINT (2648490 1246985)
+5  40.0 æg/m3 POINT (2600170 1199990)
+6  22.0 æg/m3 POINT (2586025 1221660)</code></pre>
+</div>
+</div>
+</section>
+<section id="create-prediction-grid" class="level3">
+<h3 class="anchored" data-anchor-id="create-prediction-grid">Create prediction grid</h3>
+<p>I use interpolation to estimate values in places where I have no measurements. To do this, I create a regular grid over the study area using st_make_grid().</p>
+<p>The function st_make_grid() creates a regular grid over the study area. The argument cellsize = 2000 defines the spatial resolution of the grid, meaning each grid cell represents an area of approximately 2000 meters by 2000 meters (assuming the coordinate system is in meters, which the projection: “CH1903+ / LV95” is). The option what = “centers” returns only the center points of each grid cell instead of full polygons, which is useful when I want to predict values at specific locations for interpolations.</p>
+<p>Each grid cell represents a location where I will predict NO₂.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create prediction grid</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(air, <span class="at">cellsize =</span> <span class="dv">2000</span>, <span class="at">what =</span> <span class="st">"centers"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to sf object</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>grid_sf <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(<span class="at">geometry =</span> grid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="apply-inverse-distance-weighting-idw-interpolation" class="level3">
+<h3 class="anchored" data-anchor-id="apply-inverse-distance-weighting-idw-interpolation">Apply Inverse Distance Weighting (IDW) interpolation</h3>
+<p>Inverse Distance Weighting assumes:</p>
+<p>Points closer to a measurement location have more influence than distant points.</p>
+<p>I use gstat::idw() with:</p>
+<ul>
+<li><code>formula = value ~ 1</code>: interpolate NO₂ values</li>
+<li><code>locations = air</code>: measurement points</li>
+<li><code>newdata = grid_sf</code>: prediction locations</li>
+</ul>
+<p>In <code>idw()</code>, the formula <code>value ~ 1</code> specifies that we want to interpolate the variable <code>value</code> (here, NO₂ concentrations) without using any additional explanatory variables. The <code>~ 1</code> means that only a constant mean is assumed across space, so the method relies entirely on the spatial weighting of nearby observations rather than on predictors.</p>
+<p>I also test different parameters:</p>
+<p>idp = strength of distance decay maxdist = maximum influence distance nmax / nmin = number of points used</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IDW interpolation</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>idw_result <span class="ot">&lt;-</span> <span class="fu">idw</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> value <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">locations =</span> air,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> grid_sf,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">idp =</span> <span class="dv">2</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxdist =</span> <span class="dv">50000</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">nmax =</span> <span class="dv">15</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[inverse distance weighted interpolation]</code></pre>
+</div>
+</div>
+</section>
+<section id="convert-interpolation-result-to-raster" class="level3">
+<h3 class="anchored" data-anchor-id="convert-interpolation-result-to-raster">Convert interpolation result to raster</h3>
+<p>Raster format in this case is better for visualization and spatial analysis. I convert the predicted values into a raster using terra::rast().</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert sf to SpatVector format</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>idw_vect <span class="ot">&lt;-</span> <span class="fu">vect</span>(idw_result)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create raster from interpolation results</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">rasterize</span>(idw_vect, <span class="fu">rast</span>(grid_sf, <span class="at">resolution =</span> <span class="dv">2000</span>), <span class="at">field =</span> <span class="st">"var1.pred"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualize-the-interpolated-no₂-surface" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-the-interpolated-no₂-surface">Visualize the interpolated NO₂ surface</h3>
+<p>I plot the raster to see spatial patterns in air pollution. Higher values indicate higher NO₂ concentration.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(r, <span class="at">xy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> last)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"IDW Interpolation of NO₂"</span>, <span class="at">fill =</span> <span class="st">"NO₂"</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/visualisation%20of%20idw-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="my-thoughts" class="level3">
+<h3 class="anchored" data-anchor-id="my-thoughts">My thoughts</h3>
+<p>After experimenting with several parameter combinations, I found that a grid cell size of 500 m produced very detailed results but also introduced unnecessary local variation and increased computation time. A cell size of 10 km was too coarse and removed important spatial structures, especially around urban regions and transport corridors. In my opinion, 5 km created a reasonable balance, while 2 km provided the best compromise between spatial detail and readability. For the inverse distance weighting power (idp), I found that a value of 2 produced the most realistic spatial pattern. It created visible transitions between urban centers and more rural or alpine regions without generating overly large and uniform prediction areas in regions with sparse measurements. Regarding the maximum interpolation distance (maxdist), I observed that 40 km was necessary to avoid large gaps between measurement stations, while 50 km created smoother overlaps and more plausible predictions in sparsely sampled areas. Finally, I considered nmax = 15 to be a good choice, because lower values such as 5 or 10 often produced unstable or more clearly defined spatial boundaries. I am aware that these parameter choices are partly subjective and influenced by my understanding of Switzerland’s spatial structure, including major north–south and east–west traffic corridors, as well as mountain and lake regions with lower population density. I also noticed that the sensor network appears to be biased toward urban areas and is not evenly distributed across the country. Therefore, I selected the interpolation parameters in a way that attempts to compensate for these limitations and produce a more spatially coherent interpolation result.</p>
+<p>In the resulting interpolation map, I can clearly identify major Swiss urban centers such as Basel, Bern, Zürich and Winterthur, Luzern, Bellinzona, Lugano, Chiasso/Como, Lausanne, Geneva, and St.&nbsp;Gallen. To a lesser extent, the map also reveals the main north–south and east–west transportation corridors, especially where these routes intersect in the Aarau–Olten–Zofingen region. The highest NO₂ concentrations appear to occur in the densely populated and industrialized area between Bern, Basel, Luzern, and St.&nbsp;Gallen, as well as around Lake Zürich. Additional urban hotspots such as Neuchâtel, La Chaux-de-Fonds, and Sion are also visible in the interpolation.</p>
+<p>In Ticino, the interpolation shows comparatively high NO₂ values. I believe this is partly influenced by the larger distances between measurement stations, which causes urban centers such as Lugano, Bellinzona, and Chiasso to exert stronger influence over wider areas. However, there are also plausible real-world explanations for elevated concentrations in this region. Ticino forms one of the main north–south transit corridors through the Alps, concentrating large volumes of passenger and freight traffic because only few alternative routes exist. In addition, the topography of narrow alpine valleys with steep surrounding slopes may reduce atmospheric mixing and favor the accumulation of pollutants. The region is also located close to Northern Italy, one of Europe’s most industrialized areas, which likely contributes to transboundary air pollution. Finally, industrial activity and dense settlement patterns in the main valleys of Ticino, where habitable land is limited by mountainous terrain, may further contribute to increased NO₂ concentrations.</p>
+</section>
+<section id="nearest-neighbor-approach-using-voronoi-polygons" class="level3">
+<h3 class="anchored" data-anchor-id="nearest-neighbor-approach-using-voronoi-polygons">Nearest neighbor approach using Voronoi polygons</h3>
+<p>A alternative to IDW interpolation is the nearest neighbour approach. Instead of averaging nearby points, each location is assigned the value of its closest measurement station. This can be represented spatially using Voronoi polygons. Each polygon defines the area that is closer to one station than to any other station, so every polygon directly inherits the NO₂ value of its corresponding station.</p>
+</section>
+<section id="create-voronoi-polygons" class="level3">
+<h3 class="anchored" data-anchor-id="create-voronoi-polygons">Create Voronoi polygons</h3>
+<p>I first generate Voronoi polygons from the measurement locations using st_voronoi(). This produces a spatial object where each region represents the influence area of one station.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract geometry of stations</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pts <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(air)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Voronoi diagram (as sfc object)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>voronoi_sfc <span class="ot">&lt;-</span> <span class="fu">st_voronoi</span>(<span class="fu">st_union</span>(pts))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to sf object</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>voronoi_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">st_collection_extract</span>(voronoi_sfc))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Clip the extent of the polygon layer</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>bbox <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(<span class="fu">st_bbox</span>(air))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>voronoi_sf <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(voronoi_sf, bbox)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="attach-no₂-values-to-polygons" class="level3">
+<h3 class="anchored" data-anchor-id="attach-no₂-values-to-polygons">Attach NO₂ values to polygons</h3>
+<p>Now I transfer the measured NO₂ values from the station points to the Voronoi polygons using a spatial join. So that each polygon now contains the NO₂ value of its nearest station.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>voronoi_sf <span class="ot">&lt;-</span> <span class="fu">st_join</span>(voronoi_sf, air)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualize-the-result" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-the-result">Visualize the result</h3>
+<p>I can now plot the Voronoi-based interpolation. Each polygon is colored by its assigned NO₂ value.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(voronoi_sf) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> value)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Nearest Neighbour Interpolation (Voronoi)"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"NO₂"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/visualising%20the%20polygons-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="my-thoughts-1" class="level3">
+<h3 class="anchored" data-anchor-id="my-thoughts-1">My thoughts</h3>
+<p>This approach highlights the uneven spatial distribution of measurement stations very clearly. Smaller Voronoi polygons appear in areas with a high density of stations, which typically correspond to urban regions on the Swiss Plateau. In contrast, much larger polygons are visible in regions with sparse coverage, such as the Alps, Valais, Graubünden, and parts of Central Switzerland, where fewer monitoring stations are available. This creates a strong visual contrast between well-monitored and under-sampled regions.</p>
+<p>In Ticino, the structure of the Voronoi map again reveals the main urban centers such as Bellinzona and Lugano through smaller, more tightly packed polygons, indicating higher station density and stronger local detail. At a broader scale, the spatial pattern also suggests the main north–south and east–west transport axes across Switzerland although not too clear. These corridors appear indirectly through polygons with higher values in a “line” from Lugano to Basel and Geneva via Lausanne, Bern to Zurich. Again meeting in the Aarau-Olten-Zofingen area.</p>
+<p>This approach produces a visually clear and intuitive map, and it is useful for illustrating the spatial distribution and density of measurement stations. However, it is also quite simplistic for environmental interpretation. Because each location is assigned the value of its nearest station, the method creates sharp boundaries and ignores gradual spatial changes in NO₂ concentrations. It also does not account for important real-world processes such as distance decay, atmospheric transport, or topographic effects. For this reason, while the Voronoi-based nearest neighbour approach is helpful for understanding data coverage, it is not well suited for making detailed or scientifically robust conclusions about air pollution patterns.</p>
+</section>
+</section>
+</section>
+<section id="density-estimation" class="level1">
+<h1>Density Estimation</h1>
+<section id="data-context" class="level2">
+<h2 class="anchored" data-anchor-id="data-context">Data context</h2>
+<p>In this exercise, I work with GPS tracking data from a single red kite (Milvus milvus), which has been equipped with a transmitter as part of a long-term ecological research project by the Vogelwarte Sempach. The original dataset comes from Movebank and contains movement locations across Central Europe. For this analysis, I only use the subset of points located within Switzerland to focus on national-scale movement and space use patterns.</p>
+</section>
+<section id="loading-the-necessary-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="loading-the-necessary-libraries">Loading the necessary libraries</h2>
+<p>Additionaly to the libraries used in the Interpolation task I need spatstat package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="preparing-point-data-for-spatial-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-point-data-for-spatial-analysis">Preparing point data for spatial analysis</h2>
+<p>Before I can calculate a kernel density estimate (KDE), I need to convert the GPS point data into a spatial point pattern object. The function density() from the spatstat package requires the data to be in ppp format, which represents spatial point patterns in a defined window.</p>
+<p>Using the convex hull as the observation window is a simple and practical way to define the spatial extent for the kernel density estimation. It creates a polygon that tightly follows the outermost GPS points, so that the analysis area is closely aligned with the observed movement of the bird without requiring an external boundary such as the Swiss national outline. However, this still assumes that the animal could potentially use the entire area enclosed by the hull, which may slightly overestimate the true utilized space, especially in regions where movement is concentrated in specific subareas. For this reason, ecological studies would probably a more ecologically defined study boundary.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>kite <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/rotmilan.gpkg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `rotmilan' from data source 
+  `/home/rhoumyas/Documents/ADLS/HS26/spatio-temp-ds/density-estimation/data/rotmilan.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 2305 features and 4 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 2550412 ymin: 1161011 xmax: 2672080 ymax: 1263865
+Projected CRS: CH1903+ / LV95</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convex hull of points</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>kite_hull <span class="ot">&lt;-</span> <span class="fu">st_convex_hull</span>(<span class="fu">st_union</span>(kite))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to owin</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>kite_window <span class="ot">&lt;-</span> <span class="fu">as.owin</span>(kite_hull)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to spatstat point pattern</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>kite_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(<span class="fu">st_coordinates</span>(kite), <span class="at">W =</span> kite_window)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: data contain duplicated points</code></pre>
+</div>
+</div>
+<section id="kernel-density-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="kernel-density-estimation">Kernel density estimation</h3>
+<p>The kernel density estimate describes areas of higher and lower usage intensity by smoothing the distribution of GPS points. The parameter sigma (bandwidth) controls how strongly points are smoothed. I will test different automatic bandwidth selection methods because according to theory each one makes different assumptions about spatial structure.</p>
+<p>The eps parameter (pixel size) controls the resolution of the output grid. A smaller value creates a more detailed surface but increases computation time. A larger value is faster but can oversmooth spatial patterns. I try to choose a value that balances detail and performance, avoiding both overly pixelated and overly slow outputs.</p>
+<p>After experimenting with different parameter combinations, I was not able to immediately find a satisfying result for the kernel density estimation. Because of this, I decided to first step back and directly visualize the raw GPS points to better understand their spatial structure.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(kite) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Red Kite GPS locations"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/kite%20gps-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From this plot, I could clearly identify a very dense cluster of observations in one area, while the rest of the points are more sparsely and broadly distributed. This helped me interpret why the automatic bandwidth selection was strongly influenced by the main cluster. After adjusting the parameters again with this spatial pattern in mind, I was eventually able to find a more balanced and visually meaningful combination for the density estimation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandwidth selection</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">bw.scott</span>(kite_ppp)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Kernel density estimation</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>kde <span class="ot">&lt;-</span> <span class="fu">density</span>(kite_ppp, <span class="at">sigma =</span> sigma, <span class="at">eps =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">2000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="converting-to-raster-format" class="level3">
+<h3 class="anchored" data-anchor-id="converting-to-raster-format">Converting to raster format</h3>
+<p>The output of density() is an image object (im), which I convert into a raster for easier spatial visualization and further GIS analysis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>kde_raster <span class="ot">&lt;-</span> <span class="fu">rast</span>(kde)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualizing-space-use" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-space-use">Visualizing space use</h3>
+<p>The resulting density map shows areas where the red kite spends more time. Higher values indicate more frequent space use, which can be interpreted as core activity areas such as feeding or resting zones.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kde_raster, <span class="at">main =</span> <span class="st">"Kernel Density of Red Kite Movements in Switzerland"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/kde%20vis-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The kernel density estimate is strongly influenced by the densest cluster of GPS points, which leads to a bandwidth selection that mainly reflects the core activity area. As a result, smaller clusters and more uniformly distributed locations are smoothed out or become less visible. This occurs because KDE uses a single global smoothing parameter, which cannot fully capture multiple spatial scales in the movement data.</p>
+</section>
+<section id="voronoi-approach-thiessen-polygons" class="level3">
+<h3 class="anchored" data-anchor-id="voronoi-approach-thiessen-polygons">Voronoi approach (Thiessen Polygons)</h3>
+<p>As an alternative to kernel density estimation, I can use Voronoi polygons to represent space use. Each polygon defines the area that is closest to one GPS point compared to all others. This creates a piecewise representation of space use that does not involve smoothing.</p>
+<p>To create Voronoi polygons, I first need to merge all points into a single MULTIPOINT geometry.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine points into MULTIPOINT</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>kite_union <span class="ot">&lt;-</span> <span class="fu">st_union</span>(kite)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The Voronoi diagram partitions space based on distance to the nearest observation point. This provides a clear but simplified representation of spatial structure.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the polygons</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>voronoi <span class="ot">&lt;-</span> <span class="fu">st_voronoi</span>(kite_union)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>voronoi_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">st_collection_extract</span>(voronoi))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bounding box polygon to clip the polygon layer</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>bbox <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(<span class="fu">st_bbox</span>(kite))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>voronoi_sf <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(voronoi_sf, bbox)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To interpret the Voronoi map, I attach the original GPS observations to each polygon using a spatial join.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>voronoi_sf <span class="ot">&lt;-</span> <span class="fu">st_join</span>(voronoi_sf, kite)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Each polygon now represents the spatial influence of a single observation point. Areas with dense sampling appear as smaller polygons, while areas with sparse tracking data appear as large polygons.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(voronoi_sf) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Space Use of the Red Kite in Switzerland with Thiessen polygons"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/thiessen%20visualisation-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="my-thoughts-2" class="level3">
+<h3 class="anchored" data-anchor-id="my-thoughts-2">My thoughts</h3>
+<p>I find this Voronoi or Thiessen polygon approach to be a very intuitive way of visualizing space use, especially because it directly shows how observations are distributed across space. Before this exercise, I had not encountered Thiessen polygons in practice, but I think they provide an interesting alternative perspective compared to smooth density surfaces. While the resulting map may require some additional explanation for non-technical audiences, the concept of assigning each area to its nearest observation point is relatively easy to understand once introduced. At the same time, I also question how useful this method is in a stricter scientific context compared to kernel density estimation. KDE appears to represent spatial intensity and gradual transitions more realistically, whereas Voronoi polygons create abrupt boundaries that may oversimplify movement behaviour. Nevertheless, I think the Thiessen approach is a cool way for exploring spatial structure, observation density, and local influence zones in a visually clear and interpretable way. And if we use other variables as well, we could for example color each polygon according to the time of day the bird is there or by season. You could also color them by altitude because the bird might overfly different areas in different heights. You could also use zonal statistics and color the polygons by land use or something else to gain more insight about the geographical feature in the vicinity of the point.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
